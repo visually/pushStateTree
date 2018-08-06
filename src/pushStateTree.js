@@ -718,8 +718,14 @@
         return this;
       }
       holdingDispatch = false;
-      root.dispatchEvent(new Event(POPSTATE));
+      root.dispatchEvent(this.createPopStateEvent());
       return this;
+    },
+
+    createPopStateEvent: function() {
+      return root.PopStateEvent ?
+        new root.PopStateEvent('popstate', {state: {}}) :
+        new Event('popstate');
     },
 
     assign: function (url) {

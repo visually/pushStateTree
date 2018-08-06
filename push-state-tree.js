@@ -1,6 +1,6 @@
-//! push-state-tree - v0.14.0 - 2016-02-26
+//! push-state-tree - v0.14.0 - 2018-08-06
 //* https://github.com/gartz/pushStateTree/
-//* Copyright (c) 2016 Gabriel Reitz Giannattasio <gabriel@gartz.com.br>; Licensed 
+//* Copyright (c) 2018 Gabriel Reitz Giannattasio <gabriel@gartz.com.br>; Licensed 
 
 var PushStateTree = {options: {VERSION: '0.14.0'}};
 (function (root) {
@@ -723,8 +723,14 @@ var PushStateTree = {options: {VERSION: '0.14.0'}};
         return this;
       }
       holdingDispatch = false;
-      root.dispatchEvent(new Event(POPSTATE));
+      root.dispatchEvent(this.createPopStateEvent());
       return this;
+    },
+
+    createPopStateEvent: function() {
+      return root.PopStateEvent ?
+        new root.PopStateEvent('popstate', {state: {}}) :
+        new Event('popstate');
     },
 
     assign: function (url) {
