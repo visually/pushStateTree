@@ -1,4 +1,4 @@
-//! push-state-tree - v0.14.0 - 2018-08-06
+//! push-state-tree - v0.14.0 - 2018-08-31
 //* https://github.com/gartz/pushStateTree/
 //* Copyright (c) 2018 Gabriel Reitz Giannattasio <gabriel@gartz.com.br>; Licensed 
 
@@ -728,9 +728,9 @@ var PushStateTree = {options: {VERSION: '0.14.0'}};
     },
 
     createPopStateEvent: function() {
-      return root.PopStateEvent ?
-        new root.PopStateEvent('popstate', {state: {}}) :
-        new Event('popstate');
+      var e = new root.CustomEvent('popstate');
+      e.state = {};
+      return e;
     },
 
     assign: function (url) {

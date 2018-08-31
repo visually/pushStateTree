@@ -723,9 +723,9 @@
     },
 
     createPopStateEvent: function() {
-      return root.PopStateEvent ?
-        new root.PopStateEvent('popstate', {state: {}}) :
-        new Event('popstate');
+      var e = new root.CustomEvent('popstate');
+      e.state = {};
+      return e;
     },
 
     assign: function (url) {
